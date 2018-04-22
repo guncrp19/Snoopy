@@ -19,16 +19,6 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="P:EMFSpoolfileReader.EMFPage.Thumbnail">
-            <summary>
-            A thumbnail image of the printed page
-            </summary>
-            <value></value>
-            <returns></returns>
-            <remarks>
-            The size of this thumbnail is controlled by the _Scale private constant
-            </remarks>
-        </member>
         <member name="M:EMFSpoolfileReader.EMFPage.#ctor(System.IO.BinaryReader)">
             <summary>
             Creates a new EMF page record from an open file stream which is proitioned at the 
@@ -36,14 +26,6 @@
             </summary>
             <param name="FileReader">The open file stream</param>
             <remarks></remarks>
-        </member>
-        <member name="T:EMFSpoolfileReader.EMFPages">
-            <summary>
-            A type-safe collection of <see cref="T:EMFSpoolfileReader.EMFPage">EMFPage</see> objects representing the 
-            pages of this print job 
-            </summary>
-            <remarks>
-            </remarks>
         </member>
         <member name="P:EMFSpoolfileReader.EMFRecord.Type">
             <summary>

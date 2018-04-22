@@ -96,6 +96,7 @@
     <Compile Include="EMFPage.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EMFPages.cs" />
     <Compile Include="EMFRecord.cs">
       <SubType>Code</SubType>
     </Compile>

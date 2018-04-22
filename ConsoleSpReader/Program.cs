@@ -1,79 +1,44 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Threading;
 
 namespace ConsoleSpReader
 {
   class Program
   {
-    const string spoolingPath = @"C:\Windows\System32\spool\PRINTERS\";
-    private static FileSystemWatcher watcher;
+    private static SpoolerWatcher _watcher;
+    private static ISpoolFileExtracter _extracter;
+
     static void Main( string[] args )
     {
       RegisterFileWatcher();
+      InitExtracter();
       while( Console.ReadLine() != "x" )
       {
         Thread.Sleep( 100 );
       }
+      UnRegisterFileWatcher();
     }
 
     private static void RegisterFileWatcher()
     {
-      watcher = new FileSystemWatcher()
-      {
-        Path = spoolingPath,
-        Filter = "*.spl"
-      };
-      watcher.Created += Watcher_Created;
-      watcher.EnableRaisingEvents = true;
-      watcher.IncludeSubdirectories = true;
+      _watcher = new SpoolerWatcher();
+      _watcher.WatcherFindNewFileEvent += WatcherFindNewFileEvent;
     }
 
-    private static void Watcher_Created( object sender, FileSystemEventArgs e )
+    private static void InitExtracter()
     {
-      var latestFile = GetLatestFile( spoolingPath );
-      Open( latestFile );
+      _extracter = new SpoolFileExtracter();
     }
 
-    public static string GetLatestFile( string targetDirectory )
+    private static void UnRegisterFileWatcher()
     {
-      var directory = new DirectoryInfo( targetDirectory );
-      var myFile = ( from f in directory.GetFiles( "*.spl" )
-                     orderby f.LastWriteTime descending
-                     select f ).First();
-
-      return myFile.FullName;
+      _watcher.WatcherFindNewFileEvent -= WatcherFindNewFileEvent;
     }
 
-    public static void ProcessFile( string path )
+    private static void WatcherFindNewFileEvent( string filePath )
     {
-      Console.WriteLine( "Processed file '{0}'.", path );
-    }
-
-    private static void Open( string FilePath )
-    {
-      string sFile = FilePath;
-
-      if( !string.IsNullOrEmpty( sFile ) )
-      {
-        var emfReader = new EMFSpoolfileReader.EMFSpoolfileReader();
-        try
-        {
-          emfReader.GetTruePageCount( sFile );
-        }
-        catch( Exception ex )
-        {
-          Console.WriteLine( "File is either corrupt or not an EMF format spool file - " + ex.Message, "Error loading " + sFile );
-          System.Diagnostics.Trace.TraceError( ex.ToString() );
-        }
-
-
-        if( emfReader.Pages.Count() > 0 )
-        {
-          //Console.WriteLine( "Page is acquired!" );
-        }
-      }
+      var data = _extracter.ExtractText( filePath );
+      Console.WriteLine( data );
     }
   }
 }

@@ -1,3 +1,14 @@
-ConsoleSpReader/obj/
-EMFSpoolfileReader/obj/
-EMFSpoolfileReader/bin/
+**/bin/**
+**/Debug/**
+**/Release/**
+**/obj/**
+*ReSharper*
+**/*ReSharper*/**
+bin/
+Debug/
+Release/
+obj/
+**/*.suo
+**/*.user
+/.project
+.vs/

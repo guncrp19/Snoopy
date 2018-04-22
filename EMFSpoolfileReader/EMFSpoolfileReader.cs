@@ -4,10 +4,12 @@ using System.Collections;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Collections.Generic;
+using System.Text;
+
 namespace EMFSpoolfileReader
 {
-
-	public class EMFSpoolfileReader : ISpoolfileReaderBase
+	public class EmfSpoolfileReader : ISpoolfileReaderBase
 	{
 		public static System.Diagnostics.TraceSwitch ApplicationTracing = new System.Diagnostics.TraceSwitch("EMFSpoolfileReader", "EMF Spool File reader application tracing");
 
@@ -51,7 +53,6 @@ namespace EMFSpoolfileReader
 			//\\ The number of copies per page
 		private int _Copies = 1;
 		private int _Pages = 0;
-		private EMFPages _EMFPages = new EMFPages();
 
 		private enum SpoolerRecordTypes
 		{
@@ -107,24 +108,61 @@ namespace EMFSpoolfileReader
 			public Int32 nSize;
 		}
 
-		public int GetTruePageCount(string SpoolFilename)
+    public string ExtractText( string spoolFileName )
+    {
+      string retVal = "";
+      spoolFileName = Path.ChangeExtension( spoolFileName, ".SPL" );
+
+      //\\ Open a binary reader for the spool file
+      var SpoolFileStream = new FileStream( spoolFileName, FileMode.Open, FileAccess.Read );
+      var SpoolBinaryReader = new BinaryReader( SpoolFileStream, System.Text.Encoding.UTF8 );
+
+      try
+      {
+        //Read the spooler records and count the total pages
+        var recNext = NextHeader( ref SpoolBinaryReader );
+        var txtList = new List<string>(); 
+        while( recNext.iType != SpoolerRecordTypes.SRT_EOF )
+        {
+          txtList.Add(ProcessHeader( recNext, ref SpoolBinaryReader ));
+          recNext = NextHeader( ref SpoolBinaryReader );
+        }
+
+        var builder = new StringBuilder();
+        foreach( var str in txtList )
+          builder.Append( str );
+        retVal = builder.ToString();
+      }
+      catch(Exception ex)
+      {
+        Console.WriteLine( "exception occurred when extracting text. Exception={0}", ex.Message );
+      }
+      finally
+      {
+        SpoolBinaryReader.Close();
+        SpoolFileStream.Close();
+      }
+      return retVal;
+    }
+
+		public int GetTruePageCount(string spoolFilename)
 		{
 
 			if (ApplicationTracing.TraceVerbose)
       {
-				Trace.WriteLine("GetTruePageCount for " + SpoolFilename, this.GetType().ToString());
+				Trace.WriteLine("GetTruePageCount for " + spoolFilename, this.GetType().ToString());
 			}
 
 
 			//\\ The number of copies is held in the shadow file
 			string ShadowFilename = null;
-			if (!(Path.GetExtension(SpoolFilename).ToUpper() == ".SHD"))
+			if (!(Path.GetExtension(spoolFilename).ToUpper() == ".SHD"))
       {
-				ShadowFilename = Path.ChangeExtension(SpoolFilename, ".SHD");
+				ShadowFilename = Path.ChangeExtension(spoolFilename, ".SHD");
 			}
       else
       {
-				ShadowFilename = SpoolFilename;
+				ShadowFilename = spoolFilename;
 			}
 			System.IO.FileInfo fiShadow = new System.IO.FileInfo(ShadowFilename);
 			if (fiShadow.Exists)
@@ -137,10 +175,10 @@ namespace EMFSpoolfileReader
 				ShadowFileStream.Close();
 			}
 
-			SpoolFilename = Path.ChangeExtension(SpoolFilename, ".SPL");
+			spoolFilename = Path.ChangeExtension(spoolFilename, ".SPL");
 
 			//\\ Open a binary reader for the spool file
-			System.IO.FileStream SpoolFileStream = new System.IO.FileStream(SpoolFilename, FileMode.Open, FileAccess.Read);
+			System.IO.FileStream SpoolFileStream = new System.IO.FileStream(spoolFilename, FileMode.Open, FileAccess.Read);
 			BinaryReader SpoolBinaryReader = new BinaryReader(SpoolFileStream, System.Text.Encoding.UTF8);
 
 			//Read the spooler records and count the total pages
@@ -152,7 +190,7 @@ namespace EMFSpoolfileReader
 					_Pages += 1;
 				}
 				//SpoolfileReaderPerformaceCounter.Increment()
-				SkipAHeader(recNext, ref SpoolBinaryReader);
+				ProcessHeader(recNext, ref SpoolBinaryReader);
 				recNext = NextHeader(ref SpoolBinaryReader);
 			}
 
@@ -173,7 +211,7 @@ namespace EMFSpoolfileReader
       recRet.Seek = SpoolBinaryReader.BaseStream.Position;
 			try
       {
-        recRet.iType = (EMFSpoolfileReader.SpoolerRecordTypes)SpoolBinaryReader.ReadInt32();
+        recRet.iType = (EmfSpoolfileReader.SpoolerRecordTypes)SpoolBinaryReader.ReadInt32();
 			}
       catch (EndOfStreamException e)
       {
@@ -185,9 +223,9 @@ namespace EMFSpoolfileReader
 			return recRet;
 		}
 
-
-		private void SkipAHeader(EMFMetaRecordHeader Header, ref BinaryReader SpoolBinaryReader)
+		private string ProcessHeader(EMFMetaRecordHeader Header, ref BinaryReader SpoolBinaryReader)
 		{
+      string retVal = "";
 			var header = Header;
 			if (header.nSize <= 0)
       {
@@ -214,7 +252,7 @@ namespace EMFSpoolfileReader
       else if (header.iType == SpoolerRecordTypes.SRT_PAGE | header.iType == SpoolerRecordTypes.SRT_EXT_PAGE)
       {
 				//\\ 
-				ProcessEMFRecords(Header, SpoolBinaryReader);
+				retVal = ProcessEMFRecords(Header, SpoolBinaryReader);
 			}
       else if (header.iType == SpoolerRecordTypes.SRT_EOPAGE1 | header.iType == SpoolerRecordTypes.SRT_EOPAGE2)
       {
@@ -233,30 +271,27 @@ namespace EMFSpoolfileReader
       {
 				SpoolBinaryReader.BaseStream.Seek(header.Seek + header.nSize, SeekOrigin.Begin);
 			}
+      return retVal;
+    }
 
-		}
-
-		private void ProcessEMFRecords(EMFMetaRecordHeader EMFRecord, BinaryReader SpoolBinaryReader)
+		private string ProcessEMFRecords(EMFMetaRecordHeader EMFRecord, BinaryReader SpoolBinaryReader)
 		{
+      string retVal = "";
 			long nNextRecordStart = 0;
 
 			nNextRecordStart = EMFRecord.Seek + 8;
-
 			SpoolBinaryReader.BaseStream.Seek(nNextRecordStart, SeekOrigin.Begin);
 
 			//\\ EMRMETAHEADER followed by other EMR records 
-			EMFPage ThisPage = new EMFPage(SpoolBinaryReader);
-			_EMFPages.Add(ThisPage);
-			nNextRecordStart = nNextRecordStart + ThisPage.Header.FileSize;
+			var thisPage = new EMFPage(SpoolBinaryReader);
+      retVal = thisPage.GetText();
+      nNextRecordStart = nNextRecordStart + thisPage.Header.FileSize;
 			SpoolBinaryReader.BaseStream.Seek(nNextRecordStart, SeekOrigin.Begin);
+      return retVal;
 
-		}
+    }
 
-		public EMFPages Pages {
-			get { return _EMFPages; }
-		}
-
-		public EMFSpoolfileReader()
+		public EmfSpoolfileReader()
 		{
 			InitialiseCounterCategory();
 			InitialiseCounter();
