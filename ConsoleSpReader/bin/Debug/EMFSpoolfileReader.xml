@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EMFSpoolfileReader</name>
+    </assembly>
+    <members>
+        <member name="T:EMFSpoolfileReader.EMFPage">
+            <summary>
+            Class the represents the properties of a single page of the printed document
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFPage.Header">
+            <summary>
+            The header information for this printed page
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFPage.Thumbnail">
+            <summary>
+            A thumbnail image of the printed page
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks>
+            The size of this thumbnail is controlled by the _Scale private constant
+            </remarks>
+        </member>
+        <member name="M:EMFSpoolfileReader.EMFPage.#ctor(System.IO.BinaryReader)">
+            <summary>
+            Creates a new EMF page record from an open file stream which is proitioned at the 
+            start of the EMF record 
+            </summary>
+            <param name="FileReader">The open file stream</param>
+            <remarks></remarks>
+        </member>
+        <member name="T:EMFSpoolfileReader.EMFPages">
+            <summary>
+            A type-safe collection of <see cref="T:EMFSpoolfileReader.EMFPage">EMFPage</see> objects representing the 
+            pages of this print job 
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFRecord.Type">
+            <summary>
+            The type of this enhanced metafile record 
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="T:EMFSpoolfileReader.EMFTextRecord">
+            <summary>
+            Represents a text element on the printed page
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFTextRecord.Text">
+            <summary>
+            The text of this text element
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFTextRecord.Clipped">
+            <summary>
+            True if the text is clipped inside the <see cref="P:EMFSpoolfileReader.EMFTextRecord.BoundaryRectangle">boundary 
+            rectangle</see>
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFTextRecord.Opaque">
+            <summary>
+            True if the text is surrounded by an opaque rectangle
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFTextRecord.BoundaryRectangle">
+            <summary>
+            The rectangle that bounds this text element
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="T:EMFSpoolfileReader.EMFMETAHEADER">
+            <summary>
+            The EMF header record for a spooled print job
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFMETAHEADER.BoundaryRect">
+            <summary>
+            The boundary of the printed page (the paper dimensions)
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFMETAHEADER.FrameRect">
+            <summary>
+            The frame containing the print elements
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks>
+            This can be smaller than the paper size as many printers have a non-printable margin
+            around the edge of the page
+            </remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFMETAHEADER.RecordCount">
+            <summary>
+            The number of EMF records that make up the printed page
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks>
+            These records describe teh text and graphical elements that make up the printed page
+            </remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFMETAHEADER.FileSize">
+            <summary>
+            The size of the EMR file
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFMETAHEADER.PalleteEntries">
+            <summary>
+            The number of colours in the page's paletter
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="P:EMFSpoolfileReader.EMFMETAHEADER.Description">
+            <summary>
+            The description text for this EMF spool record
+            </summary>
+            <value></value>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+    </members>
+</doc>

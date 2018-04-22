@@ -1,0 +1,5 @@
+D:\GN-1\Source\PrinterSniffer\EMFSpoolfileReader\bin\EMFSpoolfileReader.dll
+D:\GN-1\Source\PrinterSniffer\EMFSpoolfileReader\bin\EMFSpoolfileReader.pdb
+D:\GN-1\Source\PrinterSniffer\EMFSpoolfileReader\bin\EMFSpoolfileReader.xml
+D:\GN-1\Source\PrinterSniffer\EMFSpoolfileReader\obj\Debug\EMFSpoolfileReader.dll
+D:\GN-1\Source\PrinterSniffer\EMFSpoolfileReader\obj\Debug\EMFSpoolfileReader.pdb
