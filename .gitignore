@@ -2,7 +2,6 @@ ConsoleSpReader/obj/
 EMFSpoolfileReader.ConvertedToC#/obj/
 SpoolfileReadertest.ConvertedToC#/bin/
 SpoolfileReadertest.ConvertedToC#/ConsoleSpReader/bin/
-*.cs
 SpoolfileReadertest.ConvertedToC#/obj/
 SpoolfileReadertest.ConvertedToC#/ConsoleSpReader/obj/
 EMFSpoolfileReader.ConvertedToC#/bin/
