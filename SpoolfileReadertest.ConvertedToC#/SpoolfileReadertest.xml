@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpoolfileReadertest</name>
+    </assembly>
+    <members>
+        <member name="M:SpoolfileReadertest.SpoolfileReaderTestForm.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:SpoolfileReadertest.FormAbout">
+            <summary>
+            Code is located on CodeProject : 
+            </summary>
+            <remarks></remarks>
+        </member>
+    </members>
+</doc>
