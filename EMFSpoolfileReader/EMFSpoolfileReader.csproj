@@ -109,7 +109,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ISpoolfileReaderBase.cs" />
-    <Compile Include="MyNamespaceSupportForCSharp.cs" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />

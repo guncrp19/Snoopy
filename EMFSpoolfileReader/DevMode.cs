@@ -3,15 +3,11 @@ using System;
 using System.Collections;
 using System.Data;
 using System.Diagnostics;
+
 namespace EMFSpoolfileReader
 {
-	//\\ --[DevMode]------------------------------------------------------------
-	//\\ Represnts a DEVMODE structure stored in a file (shadow or spool...)
-	//\\ -----------------------------------------------------------------------
 	public class DevMode
 	{
-
-		#region "Private properties"
 		private char[] dmDeviceName = new char[65];
 		private short dmSpecVersion;
 		private short dmDriverVersion;
@@ -45,13 +41,10 @@ namespace EMFSpoolfileReader
 		private int dmReserved1;
 		private int dmReserved2;
 		private int dmPanningWidth;
-			#endregion
 		private int dmPanningHeight;
 
-		#region "Public properties"
-
-		#region "Copies"
-		public short Copies {
+		public short Copies
+    {
 			get {
 				if (dmCopies < 1) {
 					dmCopies = 1;
@@ -59,19 +52,15 @@ namespace EMFSpoolfileReader
 				return dmCopies;
 			}
 		}
-		#endregion
-		#region "Collate"
-		public bool Collate {
+
+		public bool Collate
+    {
 			get { return (dmCollate > 0); }
 		}
-		#endregion
-		#endregion
 
-		#region "Public constructors"
 		public DevMode(System.IO.BinaryReader FileReader)
 		{
 			dmDeviceName = FileReader.ReadChars(64);
-			//FileReader.BaseStream.Seek(64, IO.SeekOrigin.Current)
 			dmSpecVersion = FileReader.ReadInt16();
 			dmDriverVersion = FileReader.ReadInt16();
 			dmSize = FileReader.ReadInt16();
@@ -107,7 +96,5 @@ namespace EMFSpoolfileReader
 			dmPanningWidth = FileReader.ReadInt32();
 			dmPanningHeight = FileReader.ReadInt32();
 		}
-		#endregion
-
 	}
 }

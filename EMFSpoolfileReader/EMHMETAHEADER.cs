@@ -7,16 +7,12 @@ using System.IO;
 using System.Drawing;
 namespace EMFSpoolfileReader
 {
-
-	#region "EMFMETAHEADER"
 	/// <summary>
 	/// The EMF header record for a spooled print job
 	/// </summary>
 	/// <remarks></remarks>
 	public class EMFMETAHEADER
 	{
-
-		#region "Private properties"
 		//\\ EMR record header
 		private Int32 _iType;
 		private Int32 _nSize;
@@ -56,18 +52,16 @@ namespace EMFSpoolfileReader
 		private bool _bOpenGL;
 		private Int32 _szlMicrometersWidth;
 		private Int32 _szlMicrometersHeight;
-
 		private char[] _Description;
-		#endregion
 
-		#region "Public properties"
 		/// <summary>
 		/// The boundary of the printed page (the paper dimensions)
 		/// </summary>
 		/// <value></value>
 		/// <returns></returns>
 		/// <remarks></remarks>
-		public Rectangle BoundaryRect {
+		public Rectangle BoundaryRect
+    {
 			get { return new Rectangle(_rclBounds_Left, _rclBounds_Top, _rclBounds_Right, _rclBounds_Bottom); }
 		}
 
@@ -80,11 +74,13 @@ namespace EMFSpoolfileReader
 		/// This can be smaller than the paper size as many printers have a non-printable margin
 		/// around the edge of the page
 		/// </remarks>
-		public Rectangle FrameRect {
+		public Rectangle FrameRect
+    {
 			get { return new Rectangle(_rclFrame_Left, _rclFrame_Top, _rclFrame_Right, _rclFrame_Bottom); }
 		}
 
-		public int Size {
+		public int Size
+    {
 			get { return _nSize; }
 		}
 
@@ -96,7 +92,8 @@ namespace EMFSpoolfileReader
 		/// <remarks>
 		/// These records describe teh text and graphical elements that make up the printed page
 		/// </remarks>
-		public int RecordCount {
+		public int RecordCount
+    {
 			get { return _nRecords; }
 		}
 
@@ -106,7 +103,8 @@ namespace EMFSpoolfileReader
 		/// <value></value>
 		/// <returns></returns>
 		/// <remarks></remarks>
-		public int FileSize {
+		public int FileSize
+    {
 			get { return _nBytes; }
 		}
 
@@ -116,7 +114,8 @@ namespace EMFSpoolfileReader
 		/// <value></value>
 		/// <returns></returns>
 		/// <remarks></remarks>
-		public int PalleteEntries {
+		public int PalleteEntries
+    {
 			get { return _nPalEntries; }
 		}
 
@@ -129,10 +128,6 @@ namespace EMFSpoolfileReader
 		public string Description {
 			get { return new string( _Description); }
 		}
-		#endregion
-
-		#region "Public constructor"
-
 
 		public EMFMETAHEADER(BinaryReader SpoolBinaryReader)
 		{
@@ -184,8 +179,5 @@ namespace EMFSpoolfileReader
 				_Description = _with1.ReadChars(_nDescription);
 			}
 		}
-		#endregion
-
 	}
 }
-#endregion

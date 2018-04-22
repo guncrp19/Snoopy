@@ -18,16 +18,12 @@ namespace EMFSpoolfileReader
 	/// </remarks>
 	public class EMFPage
 	{
-
-		#region "Private properties"
 		private EMFMETAHEADER _Header;
 		private Image _Thumbnail;
 		private Int32 _Scale = 20;
 		private System.Collections.Generic.List<EMFRecord> _Records = new System.Collections.Generic.List<EMFRecord>();
-			#endregion
 		private Metafile _emfFile;
 
-		#region "Public interface"
 		/// <summary>
 		/// The header information for this printed page
 		/// </summary>
@@ -68,9 +64,6 @@ namespace EMFSpoolfileReader
 			}
 		}
 
-		#endregion
-
-		#region "Public constructors"
 		/// <summary>
 		/// Creates a new EMF page record from an open file stream which is proitioned at the 
 		/// start of the EMF record 
@@ -109,7 +102,6 @@ namespace EMFSpoolfileReader
 			}
 
 		}
-    #endregion
 
     private void PrintRecord( EMFRecord record, BinaryReader FileReader )
     {
@@ -170,19 +162,14 @@ namespace EMFSpoolfileReader
       }
     }
 
-    #region "Private members"
     private bool AbortThumbnail()
 		{
 			return false;
 		}
-		#endregion
-
 	}
 }
 namespace EMFSpoolfileReader
 {
-
-	#region "EMFPages"
 	/// <summary>
 	/// A type-safe collection of <see cref="EMFPage">EMFPage</see> objects representing the 
 	/// pages of this print job 
@@ -216,5 +203,3 @@ namespace EMFSpoolfileReader
     }
   }
 }
-
-#endregion

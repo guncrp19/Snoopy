@@ -7,8 +7,6 @@ namespace EMFSpoolfileReader
 {
 	public interface ISpoolfileReaderBase
 	{
-
 		int GetTruePageCount(string SpoolFilename);
-
 	}
 }

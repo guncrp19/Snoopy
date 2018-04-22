@@ -9,17 +9,10 @@ namespace EMFSpoolfileReader
 
 	public class EMFSpoolfileReader : ISpoolfileReaderBase
 	{
-
-		#region "Application trace switch"
-			#endregion
 		public static System.Diagnostics.TraceSwitch ApplicationTracing = new System.Diagnostics.TraceSwitch("EMFSpoolfileReader", "EMF Spool File reader application tracing");
 
-		#region "Perfomance monitoring information"
-
 		private const string PERFORMANCE_COUNTER_NAME = "EMF Spoolfile Pages";
-
 		private const string PERFORMANCE_TIMER_NAME = "EMF Spoolfile Pages/sec";
-
 		private const string PERFORMANCE_COUNTER_CATEGORY = "Spoolfile Readers";
 
 		private static PerformanceCounter SpoolfileReaderPerformaceCounter;
@@ -39,9 +32,12 @@ namespace EMFSpoolfileReader
 			SpoolfileReaderCounterCreationDataCollection.Add(SpoolfileReaderCounterCreationData);
 			SpoolfileReaderCounterCreationDataCollection.Add(SpoolfileReaderTimerCreationData);
 
-			try {
+			try
+      {
 				PerformanceCounterCategory.Create(PERFORMANCE_COUNTER_CATEGORY, "", System.Diagnostics.PerformanceCounterCategoryType.MultiInstance, SpoolerCounterCreationDataCollection);
-			} catch (System.Security.SecurityException ex) {
+			}
+      catch (System.Security.SecurityException ex)
+      {
 				System.Diagnostics.Trace.TraceError(ex.ToString());
 			}
 
@@ -51,16 +47,12 @@ namespace EMFSpoolfileReader
 		{
 			//SpoolfileReaderPerformaceCounter = New PerformanceCounter(PERFORMANCE_COUNTER_CATEGORY, PERFORMANCE_COUNTER_NAME, True)
 		}
-		#endregion
 
-		#region "Private member variables"
 			//\\ The number of copies per page
 		private int _Copies = 1;
 		private int _Pages = 0;
-			#endregion
 		private EMFPages _EMFPages = new EMFPages();
 
-		#region "Private enumerated types"
 		private enum SpoolerRecordTypes
 		{
 			SRT_EOF = 0x0,
@@ -107,18 +99,14 @@ namespace EMFSpoolfileReader
 			SRT_JOB_INFO = 0x10000
 			// // int length, wchar jobDescription
 		}
-		#endregion
 
-		#region "Private type defs"
 		private struct EMFMetaRecordHeader
 		{
 			public long Seek;
 			public SpoolerRecordTypes iType;
 			public Int32 nSize;
 		}
-		#endregion
 
-		#region "ISpoolerfileReaderBase implementation"
 		public int GetTruePageCount(string SpoolFilename)
 		{
 
@@ -174,9 +162,7 @@ namespace EMFSpoolfileReader
 
 			return _Pages * _Copies;
 		}
-		#endregion
 
-		#region "Private functions"
 		private EMFMetaRecordHeader NextHeader(ref BinaryReader SpoolBinaryReader)
 		{
 			EMFMetaRecordHeader functionReturnValue = default(EMFMetaRecordHeader);
@@ -265,21 +251,16 @@ namespace EMFSpoolfileReader
 			SpoolBinaryReader.BaseStream.Seek(nNextRecordStart, SeekOrigin.Begin);
 
 		}
-		#endregion
 
-		#region "Public interface"
 		public EMFPages Pages {
 			get { return _EMFPages; }
 		}
-		#endregion
 
-		#region "Public constructor"
 		public EMFSpoolfileReader()
 		{
 			InitialiseCounterCategory();
 			InitialiseCounter();
 		}
-		#endregion
 	}
 }
 

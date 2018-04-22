@@ -15,8 +15,6 @@ namespace EMFSpoolfileReader
 	/// </remarks>
 	public class EMFTextRecord : EMFRecord
 	{
-
-		#region "Private members"
 		private Int32 _Top;
 		private Int32 _Left;
 		private Int32 _Bottom;
@@ -35,10 +33,8 @@ namespace EMFSpoolfileReader
 		private Int32 _TxtBottom;
 		private Int32 _TxtRight;
 		private Int32 _offDX;
-			#endregion
 		private string _Text;
 
-		#region "Public enumnerated types"
 		public enum ExtendedTextOutputFlags
 		{
 			ETO_OPAQUE = 0x2,
@@ -50,7 +46,6 @@ namespace EMFSpoolfileReader
 			ETO_IGNORELANGUAGE = 0x1000,
 			ETO_PDY = 0x2000
 		}
-		#endregion
 
 		/// <summary>
 		/// The text of this text element
@@ -58,7 +53,8 @@ namespace EMFSpoolfileReader
 		/// <value></value>
 		/// <returns></returns>
 		/// <remarks></remarks>
-		public string Text {
+		public string Text
+    {
 			get { return _Text; }
 		}
 
@@ -70,7 +66,8 @@ namespace EMFSpoolfileReader
 		/// <returns></returns>
 		/// <remarks>
 		/// </remarks>
-		public bool Clipped {
+		public bool Clipped
+    {
 			get { return (_Options & (int)ExtendedTextOutputFlags.ETO_CLIPPED) == (int)ExtendedTextOutputFlags.ETO_CLIPPED; }
 		}
 
@@ -81,7 +78,8 @@ namespace EMFSpoolfileReader
 		/// <returns></returns>
 		/// <remarks>
 		/// </remarks>
-		public bool Opaque {
+		public bool Opaque
+    {
 			get { return (_Options & (int)ExtendedTextOutputFlags.ETO_OPAQUE) == (int)ExtendedTextOutputFlags.ETO_OPAQUE; }
 		}
 
@@ -91,7 +89,8 @@ namespace EMFSpoolfileReader
 		/// <value></value>
 		/// <returns></returns>
 		/// <remarks></remarks>
-		public Rectangle BoundaryRectangle {
+		public Rectangle BoundaryRectangle
+    {
 			get { return new Rectangle(_Left, _Top, _Right - _Left, _Bottom - _Top); }
 		}
 
@@ -115,12 +114,12 @@ namespace EMFSpoolfileReader
 			_TxtBottom = _with1.ReadInt32();
 			_TxtRight = _with1.ReadInt32();
 			_offDX = _with1.ReadInt32();
-			if (_offString >= 76) {
+			if (_offString >= 76)
+      {
 				_with1.BaseStream.Seek(_offString - 76, SeekOrigin.Current);
 				byte[] chars = null;
 				chars = _with1.ReadBytes(_nChars * 2);
 				_Text = System.Text.Encoding.Unicode.GetString(chars);
-				//  New String(chars)
 			}
 		}
 

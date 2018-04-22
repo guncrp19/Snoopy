@@ -36,8 +36,6 @@ namespace ConsoleSpReader
       Open( latestFile );
     }
 
-    // Process all files in the directory passed in, recurse on any directories 
-    // that are found, and process the files they contain.
     public static string GetLatestFile( string targetDirectory )
     {
       var directory = new DirectoryInfo( targetDirectory );
