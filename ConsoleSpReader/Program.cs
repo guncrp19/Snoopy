@@ -12,10 +12,18 @@ namespace ConsoleSpReader
     {
       RegisterFileWatcher();
       InitExtracter();
-      while( Console.ReadLine() != "x" )
+
+      string cmd = "";
+      do
       {
+        cmd = Console.ReadLine();
+
+        if( cmd == "c" )
+          Console.Clear();
+
         Thread.Sleep( 100 );
-      }
+      } while( cmd != "x" );
+
       UnRegisterFileWatcher();
     }
 
@@ -37,7 +45,7 @@ namespace ConsoleSpReader
 
     private static void WatcherFindNewFileEvent( string filePath )
     {
-      Thread.Sleep( 300 );
+      Thread.Sleep( 300 );    //TODO : improve with changed event
       var data = _extracter.ExtractText( filePath );
       Console.WriteLine( data );
     }
