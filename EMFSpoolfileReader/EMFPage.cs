@@ -116,21 +116,16 @@ namespace EMFSpoolfileReader
         var prevPos = FileReader.BaseStream.Position;
 
         //lets parse it
-        int seekSkip = 0;
-        seekSkip += 8; //skip EMR
-        seekSkip += 8; //skip ptlref
-
+        int seekSkip = 16;
         FileReader.BaseStream.Seek( record.Seek + seekSkip, SeekOrigin.Begin );
-
         int charCount = FileReader.ReadInt32(); //read nchars
         int fuOptions = FileReader.ReadInt32(); //read fuOptions
+
         if( fuOptions != 0x1300 )
           return retVal;
 
         var curPos = FileReader.BaseStream.Position;
-        seekSkip = 4; //skip iGraphicMode
-        seekSkip += 4; //skip exScale
-        seekSkip += 4; //skip eyScale
+        seekSkip = 12;
         FileReader.BaseStream.Seek( curPos + seekSkip, SeekOrigin.Begin );
 
         var dataChars = FileReader.ReadChars( charCount );
