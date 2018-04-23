@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 
 namespace ConsoleSpReader
@@ -10,9 +11,9 @@ namespace ConsoleSpReader
 
     static void Main( string[] args )
     {
+      InitConsole();
       RegisterFileWatcher();
       InitExtracter();
-
       string cmd = "";
       do
       {
@@ -25,6 +26,12 @@ namespace ConsoleSpReader
       } while( cmd != "x" );
 
       UnRegisterFileWatcher();
+    }
+
+    private static void InitConsole()
+    {
+      var version = Assembly.GetExecutingAssembly().GetName().Version;
+      Console.Title = string.Format("--Text Extractor--({0})", version.ToString());
     }
 
     private static void RegisterFileWatcher()
