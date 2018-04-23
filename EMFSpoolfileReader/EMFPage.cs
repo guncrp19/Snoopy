@@ -88,9 +88,9 @@ namespace EMFSpoolfileReader
       var prevPos = FileReader.BaseStream.Position;
       FileReader.BaseStream.Seek( record.Seek, SeekOrigin.Begin );
       var recordData = FileReader.ReadChars( record.Size + 8 );
-      Console.WriteLine( "[RECORD DATA TYPE] {0} {1} {2} {3}", recordData [0], recordData[1], recordData[2], recordData[3] );
-      Console.WriteLine( "[RECORD DATA] {0} {1} {2} {3}", recordData[4], recordData[5], recordData[6], recordData[7] );
+      Console.WriteLine("Record Type = {0}", record.Type);
       Console.WriteLine( "[RECORD DATA] {0}", new string( recordData ) );
+      PrintRecordByte( record, FileReader );
       FileReader.BaseStream.Seek( prevPos, SeekOrigin.Begin );
     }
 
@@ -138,6 +138,46 @@ namespace EMFSpoolfileReader
 
         FileReader.BaseStream.Seek( prevPos, SeekOrigin.Begin );
         return data;
+      }
+      else if( record.Type == EmfPlusRecordType.EmfExtTextOutW )
+      {
+        var prevPos = FileReader.BaseStream.Position;
+
+        //lets parse it
+        int seekSkip = 0;
+        seekSkip += 8; //skip EMR
+        seekSkip += 16; //skip bounds
+        seekSkip += 4; //skip IgraphicMode
+        seekSkip += 4; //skip exScale
+        seekSkip += 4; //skip eyScale
+        seekSkip += 8; // skip reference
+
+        FileReader.BaseStream.Seek( record.Seek + seekSkip, SeekOrigin.Begin );
+        
+
+        int charCount = FileReader.ReadInt32(); //read nchars
+        var curPos = FileReader.BaseStream.Position;
+        seekSkip = 4;//skip offstring
+        FileReader.BaseStream.Seek( curPos + seekSkip, SeekOrigin.Begin );
+
+        int fuOptions = FileReader.ReadInt32(); //read fuOptions
+        //if( fuOptions != 0x1300 )
+        //  return retVal;
+
+        curPos = FileReader.BaseStream.Position;
+        seekSkip = 16; //skip Rectangle
+        seekSkip += 4; //skip offdx
+        FileReader.BaseStream.Seek( curPos + seekSkip, SeekOrigin.Begin );
+
+        var dataChars = FileReader.ReadBytes( charCount*2 );
+        string data = Encoding.Unicode.GetString(dataChars);
+
+        FileReader.BaseStream.Seek( prevPos, SeekOrigin.Begin );
+        return data;
+      }
+      else if( record.Type == EmfPlusRecordType.EmfExtTextOutA || record.Type == EmfPlusRecordType.EmfPolyTextOutA || record.Type == EmfPlusRecordType.EmfPolyTextOutW )
+      {
+        PrintRecord( record, FileReader );
       }
       return retVal;
     }
