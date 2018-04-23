@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>EMFSpoolfileReader</name>
+        <name>Reader</name>
     </assembly>
     <members>
         <member name="T:EMFSpoolfileReader.EMFPage">

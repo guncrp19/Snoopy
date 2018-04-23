@@ -12,10 +12,10 @@ using System.Runtime.InteropServices;
 
 // Review the values of the assembly attributes
 
-[assembly: AssemblyTitle("EMFSpoolfileReader")]
-[assembly: AssemblyDescription("Spool file reader for EMF format spool files")]
-[assembly: AssemblyCompany("Merrion Computing Ltd")]
-[assembly: AssemblyProduct("MCL PrinterQueueuWatch")]
+[assembly: AssemblyTitle( "Reader" )]
+[assembly: AssemblyDescription( "The Printer Text Reader" )]
+[assembly: AssemblyCompany( "" )]
+[assembly: AssemblyProduct( "" )]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 
@@ -34,5 +34,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 
 
-[assembly: AssemblyVersion("1.2.*")]
+[assembly: AssemblyVersion( "0.1.*" )]
 
