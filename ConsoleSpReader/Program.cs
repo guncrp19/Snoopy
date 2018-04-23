@@ -37,6 +37,7 @@ namespace ConsoleSpReader
 
     private static void WatcherFindNewFileEvent( string filePath )
     {
+      Thread.Sleep( 300 );
       var data = _extracter.ExtractText( filePath );
       Console.WriteLine( data );
     }
