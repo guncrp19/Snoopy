@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 
-namespace TextExtractor
+namespace Reader.Utility
 {
   public class ResultCollector
   {
@@ -17,14 +17,19 @@ namespace TextExtractor
       File.WriteAllText( FullPath, data);
     }
 
-    private string GenerateFilePath()
+    public string GetResultDir()
     {
-      var path = Path.GetDirectoryName( Assembly.GetExecutingAssembly().Location );
+      var path= Path.GetDirectoryName( Assembly.GetExecutingAssembly().Location );
       path = Path.Combine( path, @"Result" );
       if( !Directory.Exists( path ) )
         Directory.CreateDirectory( path );
 
-      return GenerateIncrementFileName( path );
+      return path;
+    }
+
+    private string GenerateFilePath()
+    {
+      return GenerateIncrementFileName( GetResultDir());
     }
 
     private string GenerateIncrementFileName(string dir)

@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace ConsoleSpReader
+namespace Reader.Utility
 {
-  class SpoolerWatcher
+  public class SpoolerWatcher
   {
     const string spoolingPath = @"C:\Windows\System32\spool\PRINTERS\";
     private FileSystemWatcher _watcher;

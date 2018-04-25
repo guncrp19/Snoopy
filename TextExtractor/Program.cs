@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
-using TextExtractor;
+using Reader.Utility;
 
 namespace ConsoleSpReader
 {

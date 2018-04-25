@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using EMFSpoolfileReader;
 
-namespace ConsoleSpReader
+namespace Reader.Utility
 {
   public class SpoolFileExtracter : ISpoolFileExtracter
   {
