@@ -17,7 +17,7 @@ namespace EMFSpoolfileReader
 	/// </summary>
 	/// <remarks>
 	/// </remarks>
-	public class EMFPage
+	public class Page
 	{
 		private EMFMETAHEADER _Header;
 
@@ -39,9 +39,9 @@ namespace EMFSpoolfileReader
 		/// <param name="FileReader">The open file stream</param>
 		/// <remarks></remarks>
 
-		public EMFPage(BinaryReader FileReader)
+		public Page(BinaryReader FileReader)
 		{
-			if (EmfSpoolfileReader.ApplicationTracing.TraceVerbose)
+			if (SpoolfileReader.ApplicationTracing.TraceVerbose)
       {
 				Trace.WriteLine("New page: " + _Header.RecordCount.ToString() + " EMF records");
 			}
@@ -58,7 +58,7 @@ namespace EMFSpoolfileReader
 
       for (Record = 1; Record <= _Header.RecordCount; Record++)
       {
-        var emfRecord = new EMFRecord( FileReader );
+        var emfRecord = new Record( FileReader );
         var txtData = ParseRecord( emfRecord, FileReader );
         if(!string.IsNullOrEmpty( txtData ) )
          textBuffer.Add( txtData );
@@ -83,7 +83,7 @@ namespace EMFSpoolfileReader
 
     private List<string> textBuffer;
 
-    private void PrintRecord( EMFRecord record, BinaryReader FileReader )
+    private void PrintRecord( Record record, BinaryReader FileReader )
     {
       var prevPos = FileReader.BaseStream.Position;
       FileReader.BaseStream.Seek( record.Seek, SeekOrigin.Begin );
@@ -94,7 +94,7 @@ namespace EMFSpoolfileReader
       FileReader.BaseStream.Seek( prevPos, SeekOrigin.Begin );
     }
 
-    private void PrintRecordByte( EMFRecord record, BinaryReader FileReader )
+    private void PrintRecordByte( Record record, BinaryReader FileReader )
     {
       var prevPos = FileReader.BaseStream.Position;
       FileReader.BaseStream.Seek( record.Seek, SeekOrigin.Begin );
@@ -108,7 +108,7 @@ namespace EMFSpoolfileReader
       FileReader.BaseStream.Seek( prevPos, SeekOrigin.Begin );
     }
 
-    private string ParseRecord( EMFRecord record, BinaryReader FileReader)
+    private string ParseRecord( Record record, BinaryReader FileReader)
     {
       string retVal = "";
       if( record.Type == EmfPlusRecordType.EmfSmallTextOut )

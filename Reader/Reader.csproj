@@ -90,17 +90,16 @@
     <Compile Include="DevMode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EMFPage.cs">
+    <Compile Include="Page.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EMFPages.cs" />
-    <Compile Include="EMFRecord.cs">
+    <Compile Include="Record.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EMFSpoolfileReader.cs">
+    <Compile Include="SpoolfileReader.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EMFTextRecord.cs">
+    <Compile Include="TextRecord.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="EMHMETAHEADER.cs">

@@ -13,7 +13,7 @@ namespace EMFSpoolfileReader
 	/// </summary>
 	/// <remarks>
 	/// </remarks>
-	public class EMFTextRecord : EMFRecord
+	public class TextRecord : Record
 	{
 		private Int32 _Top;
 		private Int32 _Left;
@@ -59,7 +59,7 @@ namespace EMFSpoolfileReader
 		}
 
 		/// <summary>
-		/// True if the text is clipped inside the <see cref="EMFTextRecord.BoundaryRectangle">boundary 
+		/// True if the text is clipped inside the <see cref="TextRecord.BoundaryRectangle">boundary 
 		/// rectangle</see>
 		/// </summary>
 		/// <value></value>
@@ -94,7 +94,7 @@ namespace EMFSpoolfileReader
 			get { return new Rectangle(_Left, _Top, _Right - _Left, _Bottom - _Top); }
 		}
 
-		public EMFTextRecord(int Length, BinaryReader SpoolBinaryReader) : base(SpoolBinaryReader)
+		public TextRecord(int Length, BinaryReader SpoolBinaryReader) : base(SpoolBinaryReader)
 		{
 			var _with1 = SpoolBinaryReader;
 			_Top = _with1.ReadInt32();

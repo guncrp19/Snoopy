@@ -14,7 +14,7 @@ namespace ConsoleSpReader
       {
         var tempPath = Path.Combine(Path.GetDirectoryName( Assembly.GetEntryAssembly().Location ), Path.GetFileName( filePath ) );
         File.Copy( filePath, tempPath );
-        var emfReader = new EmfSpoolfileReader();
+        var emfReader = new SpoolfileReader();
         try
         {
           retVal = emfReader.ExtractText( tempPath );

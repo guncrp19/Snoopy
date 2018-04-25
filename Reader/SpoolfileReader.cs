@@ -9,7 +9,7 @@ using System.Text;
 
 namespace EMFSpoolfileReader
 {
-	public class EmfSpoolfileReader : ISpoolfileReaderBase
+	public class SpoolfileReader : ISpoolfileReaderBase
 	{
 		public static System.Diagnostics.TraceSwitch ApplicationTracing = new System.Diagnostics.TraceSwitch("EMFSpoolfileReader", "EMF Spool File reader application tracing");
 
@@ -211,7 +211,7 @@ namespace EMFSpoolfileReader
       recRet.Seek = SpoolBinaryReader.BaseStream.Position;
 			try
       {
-        recRet.iType = (EmfSpoolfileReader.SpoolerRecordTypes)SpoolBinaryReader.ReadInt32();
+        recRet.iType = (SpoolfileReader.SpoolerRecordTypes)SpoolBinaryReader.ReadInt32();
 			}
       catch (EndOfStreamException e)
       {
@@ -283,7 +283,7 @@ namespace EMFSpoolfileReader
 			SpoolBinaryReader.BaseStream.Seek(nNextRecordStart, SeekOrigin.Begin);
 
 			//\\ EMRMETAHEADER followed by other EMR records 
-			var thisPage = new EMFPage(SpoolBinaryReader);
+			var thisPage = new Page(SpoolBinaryReader);
       retVal = thisPage.GetText();
       nNextRecordStart = nNextRecordStart + thisPage.Header.FileSize;
 			SpoolBinaryReader.BaseStream.Seek(nNextRecordStart, SeekOrigin.Begin);
@@ -291,7 +291,7 @@ namespace EMFSpoolfileReader
 
     }
 
-		public EmfSpoolfileReader()
+		public SpoolfileReader()
 		{
 			InitialiseCounterCategory();
 			InitialiseCounter();

@@ -4,14 +4,14 @@
         <name>Reader</name>
     </assembly>
     <members>
-        <member name="T:EMFSpoolfileReader.EMFPage">
+        <member name="T:EMFSpoolfileReader.Page">
             <summary>
             Class the represents the properties of a single page of the printed document
             </summary>
             <remarks>
             </remarks>
         </member>
-        <member name="P:EMFSpoolfileReader.EMFPage.Header">
+        <member name="P:EMFSpoolfileReader.Page.Header">
             <summary>
             The header information for this printed page
             </summary>
@@ -19,7 +19,7 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="M:EMFSpoolfileReader.EMFPage.#ctor(System.IO.BinaryReader)">
+        <member name="M:EMFSpoolfileReader.Page.#ctor(System.IO.BinaryReader)">
             <summary>
             Creates a new EMF page record from an open file stream which is proitioned at the 
             start of the EMF record 
@@ -27,7 +27,7 @@
             <param name="FileReader">The open file stream</param>
             <remarks></remarks>
         </member>
-        <member name="P:EMFSpoolfileReader.EMFRecord.Type">
+        <member name="P:EMFSpoolfileReader.Record.Type">
             <summary>
             The type of this enhanced metafile record 
             </summary>
@@ -35,14 +35,14 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="T:EMFSpoolfileReader.EMFTextRecord">
+        <member name="T:EMFSpoolfileReader.TextRecord">
             <summary>
             Represents a text element on the printed page
             </summary>
             <remarks>
             </remarks>
         </member>
-        <member name="P:EMFSpoolfileReader.EMFTextRecord.Text">
+        <member name="P:EMFSpoolfileReader.TextRecord.Text">
             <summary>
             The text of this text element
             </summary>
@@ -50,9 +50,9 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="P:EMFSpoolfileReader.EMFTextRecord.Clipped">
+        <member name="P:EMFSpoolfileReader.TextRecord.Clipped">
             <summary>
-            True if the text is clipped inside the <see cref="P:EMFSpoolfileReader.EMFTextRecord.BoundaryRectangle">boundary 
+            True if the text is clipped inside the <see cref="P:EMFSpoolfileReader.TextRecord.BoundaryRectangle">boundary 
             rectangle</see>
             </summary>
             <value></value>
@@ -60,7 +60,7 @@
             <remarks>
             </remarks>
         </member>
-        <member name="P:EMFSpoolfileReader.EMFTextRecord.Opaque">
+        <member name="P:EMFSpoolfileReader.TextRecord.Opaque">
             <summary>
             True if the text is surrounded by an opaque rectangle
             </summary>
@@ -69,7 +69,7 @@
             <remarks>
             </remarks>
         </member>
-        <member name="P:EMFSpoolfileReader.EMFTextRecord.BoundaryRectangle">
+        <member name="P:EMFSpoolfileReader.TextRecord.BoundaryRectangle">
             <summary>
             The rectangle that bounds this text element
             </summary>

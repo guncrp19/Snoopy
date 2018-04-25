@@ -8,7 +8,7 @@ using System.Drawing.Imaging;
 namespace EMFSpoolfileReader
 {
 
-	public class EMFRecord
+	public class Record
 	{
 
 		private long _Seek;
@@ -33,7 +33,7 @@ namespace EMFSpoolfileReader
 			get { return _Seek; }
 		}
 
-    public EMFRecord( BinaryReader SpoolBinaryReader )
+    public Record( BinaryReader SpoolBinaryReader )
     {
       var _with1 = SpoolBinaryReader;
       _Seek = _with1.BaseStream.Position;
