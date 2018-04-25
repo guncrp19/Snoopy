@@ -31,14 +31,16 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextExtractorForm));
       this.TextBoxLogger = new System.Windows.Forms.TextBox();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-      this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.openResultFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
       // TextBoxLogger
       // 
+      this.TextBoxLogger.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
       this.TextBoxLogger.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.TextBoxLogger.ForeColor = System.Drawing.Color.White;
       this.TextBoxLogger.Location = new System.Drawing.Point(0, 33);
       this.TextBoxLogger.Multiline = true;
       this.TextBoxLogger.Name = "TextBoxLogger";
@@ -59,19 +61,19 @@
       this.menuStrip1.TabIndex = 1;
       this.menuStrip1.Text = "menuStrip1";
       // 
-      // clearToolStripMenuItem
-      // 
-      this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-      this.clearToolStripMenuItem.Size = new System.Drawing.Size(63, 29);
-      this.clearToolStripMenuItem.Text = "Clear";
-      this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItemClick);
-      // 
       // openResultFolderToolStripMenuItem
       // 
       this.openResultFolderToolStripMenuItem.Name = "openResultFolderToolStripMenuItem";
       this.openResultFolderToolStripMenuItem.Size = new System.Drawing.Size(175, 29);
       this.openResultFolderToolStripMenuItem.Text = "Open Result Folder";
       this.openResultFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenResultFolderToolStripMenuItemClick);
+      // 
+      // clearToolStripMenuItem
+      // 
+      this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+      this.clearToolStripMenuItem.Size = new System.Drawing.Size(63, 29);
+      this.clearToolStripMenuItem.Text = "Clear";
+      this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItemClick);
       // 
       // TextExtractorForm
       // 
