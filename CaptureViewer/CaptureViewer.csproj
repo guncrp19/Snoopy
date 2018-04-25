@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextExtractorFormController.cs" />
     <EmbeddedResource Include="TextExtractorForm.resx">
       <DependentUpon>TextExtractorForm.cs</DependentUpon>
     </EmbeddedResource>

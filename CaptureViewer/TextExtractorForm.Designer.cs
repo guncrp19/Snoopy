@@ -64,14 +64,14 @@
       this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
       this.clearToolStripMenuItem.Size = new System.Drawing.Size(63, 29);
       this.clearToolStripMenuItem.Text = "Clear";
-      this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+      this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItemClick);
       // 
       // openResultFolderToolStripMenuItem
       // 
       this.openResultFolderToolStripMenuItem.Name = "openResultFolderToolStripMenuItem";
       this.openResultFolderToolStripMenuItem.Size = new System.Drawing.Size(175, 29);
       this.openResultFolderToolStripMenuItem.Text = "Open Result Folder";
-      this.openResultFolderToolStripMenuItem.Click += new System.EventHandler(this.openResultFolderToolStripMenuItem_Click);
+      this.openResultFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenResultFolderToolStripMenuItemClick);
       // 
       // TextExtractorForm
       // 
