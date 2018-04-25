@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
+using TextExtractor;
 
 namespace ConsoleSpReader
 {
@@ -9,10 +10,12 @@ namespace ConsoleSpReader
   {
     private static SpoolerWatcher _watcher;
     private static ISpoolFileExtracter _extracter;
+    private static ResultCollector _collector;
 
     static void Main( string[] args )
     {
       InitConsole();
+      InitCollector();
       RegisterFileWatcher();
       InitExtracter();
       string cmd = "";
@@ -27,6 +30,11 @@ namespace ConsoleSpReader
       } while( cmd != "x" );
 
       UnRegisterFileWatcher();
+    }
+
+    private static void InitCollector()
+    {
+      _collector = new ResultCollector();
     }
 
     private static void InitConsole()
@@ -55,7 +63,8 @@ namespace ConsoleSpReader
     {
       Thread.Sleep( 300 );    //TODO : improve with changed event
       var data = _extracter.ExtractText( filePath );
-      Console.WriteLine( data );
+      _collector.PrintToText( data );
+      Console.WriteLine( "Captured Success!. Path = {0}", _collector.FullPath );
     }
   }
 }
