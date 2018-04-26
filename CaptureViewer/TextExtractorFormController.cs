@@ -10,6 +10,7 @@ namespace CaptureViewer
     private ISpoolFileExtracter _extracter;
     private ResultCollector _collector;
     private readonly TextExtractorForm _extractorForm;
+    private DebugForm _debugForm;
 
     public TextExtractorFormController( TextExtractorForm form )
     {
@@ -17,6 +18,8 @@ namespace CaptureViewer
       InitCollector();
       RegisterFileWatcher();
       InitExtracter();
+
+      DebugLogger.Instance.LogEvent += HandleLogMessage;
     }
 
     public void ShowResultDirectory()
@@ -26,8 +29,30 @@ namespace CaptureViewer
       Thread.Sleep( 100 );
     }
 
+    public void ShowDebugDialog()
+    {
+      _debugForm = new DebugForm();
+      _debugForm.ShowDialog();
+
+      _debugForm = null;
+    }
+
+    public void CleanUp()
+    {
+      DebugLogger.Instance.LogEvent -= HandleLogMessage;
+    }
+
+    private void HandleLogMessage( string message )
+    {
+      if( _debugForm == null )
+        return;
+
+      _debugForm.PrintToDebug( message );
+    }
+
     private void WatcherFindNewFileEvent( string filePath )
     {
+      DebugLogger.Instance.Log(string.Format("File Found = {0}", filePath));
       Thread.Sleep( 300 );    //TODO : improve with changed event
       var data = _extracter.ExtractText( filePath );
       _collector.PrintToText( data );

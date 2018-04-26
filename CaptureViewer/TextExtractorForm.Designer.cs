@@ -33,6 +33,7 @@
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.openResultFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -54,7 +55,8 @@
       this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openResultFolderToolStripMenuItem,
-            this.clearToolStripMenuItem});
+            this.clearToolStripMenuItem,
+            this.debugToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(578, 33);
@@ -75,6 +77,13 @@
       this.clearToolStripMenuItem.Text = "Clear";
       this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItemClick);
       // 
+      // debugToolStripMenuItem
+      // 
+      this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+      this.debugToolStripMenuItem.Size = new System.Drawing.Size(78, 29);
+      this.debugToolStripMenuItem.Text = "Debug";
+      this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
+      // 
       // TextExtractorForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -89,6 +98,7 @@
       this.MinimumSize = new System.Drawing.Size(500, 500);
       this.Name = "TextExtractorForm";
       this.Text = "Text Extractor";
+      this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ExtractorFormClosed);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
       this.ResumeLayout(false);
@@ -102,6 +112,7 @@
     private System.Windows.Forms.MenuStrip menuStrip1;
     private System.Windows.Forms.ToolStripMenuItem openResultFolderToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
   }
 }
 

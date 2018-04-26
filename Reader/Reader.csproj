@@ -106,6 +106,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ISpoolfileReaderBase.cs" />
+    <Compile Include="Utility\DebugLogger.cs" />
     <Compile Include="Utility\ISpoolFileExtracter.cs" />
     <Compile Include="Utility\ResultCollector.cs" />
     <Compile Include="Utility\SpoolerWatcher.cs" />
