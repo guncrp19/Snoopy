@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using Reader.Utility;
 
 namespace EMFSpoolfileReader
 {
@@ -121,11 +122,13 @@ namespace EMFSpoolfileReader
       {
         //Read the spooler records and count the total pages
         var recNext = NextHeader( ref SpoolBinaryReader );
+        DebugLogger.Instance.Log( string.Format( "header. type={0}, size={1}", recNext.iType, recNext.nSize ) );
         var txtList = new List<string>(); 
         while( recNext.iType != SpoolerRecordTypes.SRT_EOF )
         {
           txtList.Add(ProcessHeader( recNext, ref SpoolBinaryReader ));
           recNext = NextHeader( ref SpoolBinaryReader );
+          DebugLogger.Instance.Log( string.Format( "header. type={0}, size={1}", recNext.iType, recNext.nSize ) );
         }
 
         var builder = new StringBuilder();
@@ -293,8 +296,8 @@ namespace EMFSpoolfileReader
 
 		public SpoolfileReader()
 		{
-			InitialiseCounterCategory();
-			InitialiseCounter();
+			//InitialiseCounterCategory();
+			//InitialiseCounter();
 		}
 	}
 }

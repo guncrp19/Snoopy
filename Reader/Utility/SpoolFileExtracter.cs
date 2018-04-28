@@ -13,7 +13,7 @@ namespace Reader.Utility
       if( !string.IsNullOrEmpty( filePath ) )
       {
         var tempPath = Path.Combine(Path.GetDirectoryName( Assembly.GetEntryAssembly().Location ), Path.GetFileName( filePath ) );
-        File.Copy( filePath, tempPath );
+        File.Copy( filePath, tempPath, true);
         var emfReader = new SpoolfileReader();
         try
         {

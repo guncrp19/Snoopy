@@ -24,6 +24,7 @@ namespace CaptureViewer
         return;
       }
       textBoxDebug.AppendText( message );
+      textBoxDebug.AppendText( Environment.NewLine);
     }
 
     public void ClearLog()
