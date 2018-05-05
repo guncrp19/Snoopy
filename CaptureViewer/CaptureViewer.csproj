@@ -44,26 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationConfig.cs" />
-    <Compile Include="DebugForm.cs">
+    <Compile Include="Config\ApplicationConfig.cs" />
+    <Compile Include="GUI\DebugForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DebugForm.Designer.cs">
+    <Compile Include="GUI\DebugForm.Designer.cs">
       <DependentUpon>DebugForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TextExtractorForm.cs">
+    <Compile Include="GUI\TextExtractorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TextExtractorForm.Designer.cs">
+    <Compile Include="GUI\TextExtractorForm.Designer.cs">
       <DependentUpon>TextExtractorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextExtractorFormController.cs" />
-    <EmbeddedResource Include="DebugForm.resx">
+    <Compile Include="GUI\TextExtractorFormController.cs" />
+    <EmbeddedResource Include="GUI\DebugForm.resx">
       <DependentUpon>DebugForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TextExtractorForm.resx">
+    <EmbeddedResource Include="GUI\TextExtractorForm.resx">
       <DependentUpon>TextExtractorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

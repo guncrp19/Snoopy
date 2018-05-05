@@ -12,10 +12,10 @@ namespace CaptureViewer
     {
       InitializeComponent();
       InitTitle();
-      _controller = new TextExtractorFormController(this);
+      _controller = new TextExtractorFormController( this );
     }
 
-    public void PrintToLog(string message, string fullPath)
+    public void PrintToLog( string message, string fullPath )
     {
       if( InvokeRequired )
       {
@@ -25,7 +25,7 @@ namespace CaptureViewer
       TextBoxLogger.AppendText( message );
       TextBoxLogger.AppendText( "=======================" );
       TextBoxLogger.AppendText( Environment.NewLine );
-      TextBoxLogger.AppendText ( "Saved to : " );
+      TextBoxLogger.AppendText( "Saved to : " );
       TextBoxLogger.AppendText( Environment.NewLine );
       TextBoxLogger.AppendText( fullPath );
       TextBoxLogger.AppendText( Environment.NewLine );
