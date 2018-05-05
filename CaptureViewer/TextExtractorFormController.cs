@@ -101,7 +101,7 @@ namespace CaptureViewer
 
     private void RegisterFileWatcher()
     {
-      _watcher = new SpoolerWatcher();
+      _watcher = new SpoolerWatcher(_appConfig.SpoolerPath);
       _watcher.WatcherFindNewFileEvent += WatcherFindNewFileEvent;
     }
 

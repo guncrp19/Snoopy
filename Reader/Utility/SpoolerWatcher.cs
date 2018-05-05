@@ -8,17 +8,18 @@ namespace Reader.Utility
 {
   public class SpoolerWatcher
   {
-    const string spoolingPath = @"C:\Windows\System32\spool\PRINTERS\";
+    private string _spoolingPath;
     private FileSystemWatcher _watcher;
 
     public delegate void OnWatcherFindNewFile( string filePath );
     public event OnWatcherFindNewFile WatcherFindNewFileEvent;
 
-    public SpoolerWatcher()
+    public SpoolerWatcher(string spoolPath)
     {
+      _spoolingPath = spoolPath;
       _watcher = new FileSystemWatcher()
       {
-        Path = spoolingPath,
+        Path = _spoolingPath,
         Filter = "*.spl"
       };
       _watcher.Created += WatcherOnFileCreated;
@@ -34,7 +35,7 @@ namespace Reader.Utility
 
     private void WatcherOnFileCreated( object sender, FileSystemEventArgs e )
     {
-      var latestFile = GetLatestFile( spoolingPath );
+      var latestFile = GetLatestFile( _spoolingPath );
       InvokeWatcherFindNewFileEvent( latestFile );
     }
 

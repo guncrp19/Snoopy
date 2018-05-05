@@ -8,6 +8,7 @@ namespace CaptureViewer
     public string Uri;
     public string UserName;
     public string SecurityProtocol;
+    public string SpoolerPath;
 
     public ApplicationConfig()
     {
@@ -23,6 +24,7 @@ namespace CaptureViewer
         Uri = GetConfig( doc, "Uri" );
         UserName = GetConfig( doc, "UserName" );
         SecurityProtocol = GetConfig( doc, "SecurityProtocol" );
+        SpoolerPath = GetConfig( doc, "SpoolerPath" );
       }
       catch
       {
