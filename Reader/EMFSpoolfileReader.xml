@@ -35,48 +35,6 @@
             <returns></returns>
             <remarks></remarks>
         </member>
-        <member name="T:EMFSpoolfileReader.TextRecord">
-            <summary>
-            Represents a text element on the printed page
-            </summary>
-            <remarks>
-            </remarks>
-        </member>
-        <member name="P:EMFSpoolfileReader.TextRecord.Text">
-            <summary>
-            The text of this text element
-            </summary>
-            <value></value>
-            <returns></returns>
-            <remarks></remarks>
-        </member>
-        <member name="P:EMFSpoolfileReader.TextRecord.Clipped">
-            <summary>
-            True if the text is clipped inside the <see cref="P:EMFSpoolfileReader.TextRecord.BoundaryRectangle">boundary 
-            rectangle</see>
-            </summary>
-            <value></value>
-            <returns></returns>
-            <remarks>
-            </remarks>
-        </member>
-        <member name="P:EMFSpoolfileReader.TextRecord.Opaque">
-            <summary>
-            True if the text is surrounded by an opaque rectangle
-            </summary>
-            <value></value>
-            <returns></returns>
-            <remarks>
-            </remarks>
-        </member>
-        <member name="P:EMFSpoolfileReader.TextRecord.BoundaryRectangle">
-            <summary>
-            The rectangle that bounds this text element
-            </summary>
-            <value></value>
-            <returns></returns>
-            <remarks></remarks>
-        </member>
         <member name="T:EMFSpoolfileReader.EMFMETAHEADER">
             <summary>
             The EMF header record for a spooled print job

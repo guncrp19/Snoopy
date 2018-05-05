@@ -99,9 +99,6 @@
     <Compile Include="SpoolfileReader.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TextRecord.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="EMHMETAHEADER.cs">
       <SubType>Code</SubType>
     </Compile>
