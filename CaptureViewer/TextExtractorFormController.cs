@@ -75,7 +75,8 @@ namespace CaptureViewer
       var data = _extracter.ExtractText( filePath );
       _collector.PrintToText( data );
       _extractorForm.PrintToLog( data, _collector.FullPath );
-      SendDataToServer( data );
+      var t = new Thread( () => SendDataToServer( data ) );
+      t.Start();
     }
 
     private void SendDataToServer(string data)
