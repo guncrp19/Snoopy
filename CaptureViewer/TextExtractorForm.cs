@@ -33,6 +33,17 @@ namespace CaptureViewer
       TextBoxLogger.AppendText( Environment.NewLine );
     }
 
+    public void PrintToLog( string message )
+    {
+      if( InvokeRequired )
+      {
+        BeginInvoke( (Action)( () => PrintToLog( message ) ) );
+        return;
+      }
+      TextBoxLogger.AppendText( message );
+      TextBoxLogger.AppendText( Environment.NewLine );
+    }
+
     public void ClearLog()
     {
       if( InvokeRequired )

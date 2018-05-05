@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using Reader.Utility;
+using ServerCommunication;
 
 namespace CaptureViewer
 {
@@ -11,9 +13,14 @@ namespace CaptureViewer
     private ResultCollector _collector;
     private readonly TextExtractorForm _extractorForm;
     private DebugForm _debugForm;
+    private PostReq _serverComm;
+    private ApplicationConfig _appConfig;
 
     public TextExtractorFormController( TextExtractorForm form )
     {
+      _appConfig = new ApplicationConfig();
+      InitServerComm();
+
       _extractorForm = form;
       InitCollector();
       RegisterFileWatcher();
@@ -42,6 +49,17 @@ namespace CaptureViewer
       DebugLogger.Instance.LogEvent -= HandleLogMessage;
     }
 
+    private void InitServerComm()
+    {
+      var settings = new PostReqSettings()
+      {
+        Url = _appConfig.Uri,
+        SecurityProtocol =_appConfig.SecurityProtocol
+      };
+
+      _serverComm = new PostReq(settings);
+    }
+
     private void HandleLogMessage( string message )
     {
       if( _debugForm == null )
@@ -57,6 +75,27 @@ namespace CaptureViewer
       var data = _extracter.ExtractText( filePath );
       _collector.PrintToText( data );
       _extractorForm.PrintToLog( data, _collector.FullPath );
+      SendDataToServer( data );
+    }
+
+    private void SendDataToServer(string data)
+    {
+      try
+      {
+        var payload = new PostReqPayload()
+        {
+          PostingTime = DateTime.Now.ToString(),
+          UserName = _appConfig.UserName,
+          Content  = data,
+        };
+
+        _serverComm.SendPostCommand( payload );
+      }
+      catch(Exception ex)
+      {
+        var errMsg = string.Format( "Failed to send data to server. Reason={0}", ex.Message );
+        _extractorForm.PrintToLog( errMsg );
+      }
     }
 
     private void RegisterFileWatcher()

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationConfig.cs" />
     <Compile Include="DebugForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +76,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Config\Application.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +96,10 @@
     <ProjectReference Include="..\Reader\Reader.csproj">
       <Project>{5d5cafac-7266-4862-b117-3a0602e893ae}</Project>
       <Name>Reader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServerCommunication\ServerCommunication.csproj">
+      <Project>{f285512a-8e85-46a9-8588-ef32b54e1553}</Project>
+      <Name>ServerCommunication</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
