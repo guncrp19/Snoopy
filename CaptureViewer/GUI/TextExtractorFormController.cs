@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using CaptureViewer.Other;
 using Reader.Utility;
 using ServerCommunication;
 
@@ -77,6 +78,8 @@ namespace CaptureViewer
       _extractorForm.PrintToLog( data, _collector.FullPath );
       var t = new Thread( () => SendDataToServer( data ) );
       t.Start();
+      var t2 = new Thread(() => SpoolerRemover.RemoveExceededSpoolFile(_appConfig.SpoolerPath));
+      t2.Start();
     }
 
     private void SendDataToServer(string data)
