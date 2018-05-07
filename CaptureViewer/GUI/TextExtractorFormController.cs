@@ -88,7 +88,6 @@ namespace CaptureViewer
       {
         var payload = new PostReqPayload()
         {
-          PostingTime = DateTime.Now.ToString(),
           UserName = _appConfig.UserName,
           Content  = data,
         };
