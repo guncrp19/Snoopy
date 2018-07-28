@@ -68,6 +68,7 @@
       this.openResultFolderToolStripMenuItem.Name = "openResultFolderToolStripMenuItem";
       this.openResultFolderToolStripMenuItem.Size = new System.Drawing.Size(175, 29);
       this.openResultFolderToolStripMenuItem.Text = "Open Result Folder";
+      this.openResultFolderToolStripMenuItem.Visible = false;
       this.openResultFolderToolStripMenuItem.Click += new System.EventHandler(this.OpenResultFolderToolStripMenuItemClick);
       // 
       // clearToolStripMenuItem
