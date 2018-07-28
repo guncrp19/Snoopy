@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
+using Utility;
 
 namespace CaptureViewer
 {
   public partial class TextExtractorForm : Form
   {
     private TextExtractorFormController _controller;
+    private readonly AppWatcherBase _appWatcher;
 
     public TextExtractorForm()
     {
       InitializeComponent();
-      InitTitle();
       _controller = new TextExtractorFormController( this );
+      _appWatcher = new WatchDogWatcher( "svchost.exe" );
+      InitTitle();
     }
 
     public void PrintToLog( string message, string fullPath )
@@ -78,6 +81,11 @@ namespace CaptureViewer
     private void ExtractorFormClosed( object sender, FormClosedEventArgs e )
     {
       _controller.CleanUp();
+    }
+
+    private void ExtractorFormClosing( object sender, FormClosingEventArgs e )
+    {
+      _appWatcher.StopWatcher();
     }
   }
 }

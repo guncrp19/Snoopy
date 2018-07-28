@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerCommunication", "Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPrj", "TestPrj\TestPrj.csproj", "{A72FBA1D-8DA0-4035-AEA2-36DAC0FBC3AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "svchost", "svchost\svchost.csproj", "{8C7FD5CE-C372-4862-B3E7-88DCF24CF553}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{0AB9F707-A699-4FC6-AF73-AE6EA54882E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,11 +34,21 @@ Global
 		{F285512A-8E85-46A9-8588-EF32B54E1553}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F285512A-8E85-46A9-8588-EF32B54E1553}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A72FBA1D-8DA0-4035-AEA2-36DAC0FBC3AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A72FBA1D-8DA0-4035-AEA2-36DAC0FBC3AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A72FBA1D-8DA0-4035-AEA2-36DAC0FBC3AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A72FBA1D-8DA0-4035-AEA2-36DAC0FBC3AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C7FD5CE-C372-4862-B3E7-88DCF24CF553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7FD5CE-C372-4862-B3E7-88DCF24CF553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7FD5CE-C372-4862-B3E7-88DCF24CF553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7FD5CE-C372-4862-B3E7-88DCF24CF553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AB9F707-A699-4FC6-AF73-AE6EA54882E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AB9F707-A699-4FC6-AF73-AE6EA54882E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AB9F707-A699-4FC6-AF73-AE6EA54882E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AB9F707-A699-4FC6-AF73-AE6EA54882E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B4382349-C671-45DB-8A94-828D29C5B116}
 	EndGlobalSection
 EndGlobal

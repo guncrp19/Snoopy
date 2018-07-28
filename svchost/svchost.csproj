@@ -4,14 +4,27 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92B42334-92C0-46B8-BE0B-9DEFD31739C8}</ProjectGuid>
+    <ProjectGuid>{8C7FD5CE-C372-4862-B3E7-88DCF24CF553}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CaptureViewer</RootNamespace>
-    <AssemblyName>CaptureViewer</AssemblyName>
+    <RootNamespace>svchost</RootNamespace>
+    <AssemblyName>svchost</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,29 +57,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\ApplicationConfig.cs" />
-    <Compile Include="GUI\DebugForm.cs">
+    <Compile Include="svchostForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\DebugForm.Designer.cs">
-      <DependentUpon>DebugForm.cs</DependentUpon>
+    <Compile Include="svchostForm.Designer.cs">
+      <DependentUpon>svchostForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\TextExtractorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\TextExtractorForm.Designer.cs">
-      <DependentUpon>TextExtractorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Other\SpoolerRemover.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GUI\TextExtractorFormController.cs" />
-    <EmbeddedResource Include="GUI\DebugForm.resx">
-      <DependentUpon>DebugForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\TextExtractorForm.resx">
-      <DependentUpon>TextExtractorForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -75,11 +73,10 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Config\Application.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="svchostForm.resx">
+      <DependentUpon>svchostForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -91,21 +88,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Reader\Reader.csproj">
-      <Project>{5d5cafac-7266-4862-b117-3a0602e893ae}</Project>
-      <Name>Reader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServerCommunication\ServerCommunication.csproj">
-      <Project>{f285512a-8e85-46a9-8588-ef32b54e1553}</Project>
-      <Name>ServerCommunication</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{0ab9f707-a699-4fc6-af73-ae6ea54882e0}</Project>
       <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetFileName)" "$(SolutionDir)CaptureViewer\bin\$(ConfigurationName)\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

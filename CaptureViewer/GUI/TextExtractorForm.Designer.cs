@@ -98,6 +98,7 @@
       this.MinimumSize = new System.Drawing.Size(500, 500);
       this.Name = "TextExtractorForm";
       this.Text = "Text Extractor";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ExtractorFormClosing);
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ExtractorFormClosed);
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
