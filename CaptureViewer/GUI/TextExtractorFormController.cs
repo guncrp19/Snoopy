@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using CaptureViewer.Other;
 using Reader.Utility;
@@ -15,15 +16,14 @@ namespace CaptureViewer
     private readonly TextExtractorForm _extractorForm;
     private DebugForm _debugForm;
     private PostReq _postRequest;
+    private PostWorker _postWorker;
     private ApplicationConfig _appConfig;
 
     public TextExtractorFormController( TextExtractorForm form )
     {
       _appConfig = new ApplicationConfig();
-      InitServerComm();
-
       _extractorForm = form;
-      InitCollector();
+      InitServerComm();     
       RegisterFileWatcher();
       InitExtracter();
 
@@ -52,6 +52,13 @@ namespace CaptureViewer
 
     private void InitServerComm()
     {
+      string progDataPath = Environment.GetFolderPath( Environment.SpecialFolder.CommonApplicationData );
+      string workerPath = Path.Combine( progDataPath, @"Snoopy" );
+
+      //init result collector
+      _collector = new ResultCollector( workerPath );
+
+      //init post worker
       var settings = new PostReqSettings()
       {
         Url = _appConfig.Uri,
@@ -59,6 +66,15 @@ namespace CaptureViewer
       };
 
       _postRequest = new PostReq(settings);
+
+      var workerSetting = new PostWorkerSettings()
+      {
+        WorkingDirectory = workerPath,
+        UserName = _appConfig.UserName,
+        PostReq = _postRequest
+      };
+
+      _postWorker = new PostWorker( workerSetting );
     }
 
     private void HandleLogMessage( string message )
@@ -75,42 +91,15 @@ namespace CaptureViewer
       Thread.Sleep( 300 );    //TODO : improve with changed event
       var data = _extracter.ExtractText( filePath );
       _collector.PrintToText( data );
-      _extractorForm.PrintToLog( data, _collector.FullPath );
-      var t = new Thread( () => SendDataToServer( data ) );
-      t.Start();
+      _extractorForm.PrintToLog( data );
       var t2 = new Thread(() => SpoolerRemover.RemoveExceededSpoolFile(_appConfig.SpoolerPath));
       t2.Start();
-    }
-
-    private void SendDataToServer(string data)
-    {
-      try
-      {
-        var payload = new PostReqPayload()
-        {
-          PostingTime = DateTime.Now.ToString(),
-          UserName = _appConfig.UserName,
-          Content  = data,
-        };
-
-        _postRequest.SendPostCommand( payload );
-      }
-      catch(Exception ex)
-      {
-        var errMsg = string.Format( "Failed to send data to server. Reason={0}", ex.Message );
-        _extractorForm.PrintToLog( errMsg );
-      }
     }
 
     private void RegisterFileWatcher()
     {
       _watcher = new SpoolerWatcher(_appConfig.SpoolerPath);
       _watcher.WatcherFindNewFileEvent += WatcherFindNewFileEvent;
-    }
-
-    private void InitCollector()
-    {
-      _collector = new ResultCollector();
     }
 
     private void InitExtracter()

@@ -5,26 +5,24 @@ namespace Reader.Utility
 {
   public class ResultCollector
   {
-    public string FullPath
+    private readonly string _workingDir;
+
+    public ResultCollector( string workingDir )
     {
-      get;
-      private set;
+      _workingDir = workingDir;
     }
 
     public void PrintToText(string data)
     {
-      FullPath = GenerateFilePath();
-      File.WriteAllText( FullPath, data);
+      File.WriteAllText( GenerateFilePath(), data);
     }
 
     public string GetResultDir()
     {
-      var path= Path.GetDirectoryName( Assembly.GetExecutingAssembly().Location );
-      path = Path.Combine( path, @"Result" );
-      if( !Directory.Exists( path ) )
-        Directory.CreateDirectory( path );
+      if( !Directory.Exists( _workingDir ) )
+        Directory.CreateDirectory( _workingDir );
 
-      return path;
+      return _workingDir;
     }
 
     private string GenerateFilePath()
@@ -34,7 +32,7 @@ namespace Reader.Utility
 
     private string GenerateIncrementFileName(string dir)
     {
-      string baseName = "TextCapture_{0}.txt";
+      string baseName = "Snoop_{0}.txt";
       int index = 0;
       string filePath = "";
       do

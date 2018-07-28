@@ -29,7 +29,7 @@ namespace ServerCommunication
         {
           File.Delete( fullPath );
         }
-        catch(Exception ex)
+        catch(Exception)
         {
           Thread.Sleep( 100 );
         }
@@ -44,13 +44,12 @@ namespace ServerCommunication
       try
       {
         var fileInfo = new DirectoryInfo( _settings.WorkingDirectory ).GetFileSystemInfos().OrderByDescending( fi => fi.CreationTime ).First();
-        //SendDataToServer(File.ReadAllText(fileInfo.FullName));
-        Thread.Sleep(3000);
+        SendDataToServer(File.ReadAllText(fileInfo.FullName));
         success = true;
 
         DeleteFile(fileInfo.FullName);
       }
-      catch(Exception ex)
+      catch(Exception)
       {
         success = false;
       }
@@ -86,7 +85,7 @@ namespace ServerCommunication
               break;
           }
         }
-        catch(Exception ex)
+        catch(Exception)
         {
 
         }
