@@ -1,12 +1,30 @@
 ﻿using System;
 using System.Management;
+using ServerCommunication;
 
 namespace TestPrj
 {
   class Program
   {
+    static PostWorker _worker;
+    static void TestPostWorker()
+    {
+      string path = @"D:\TestingFolder";
+      PostWorkerSettings setting = new PostWorkerSettings()
+      {
+        WorkingDirectory = path,
+        UserName = "test", 
+        PostReq = new PostReq(new PostReqSettings(){ SecurityProtocol = "tls", Url="localhost"} )
+      };
+
+      _worker = new PostWorker( setting );
+
+    }
+
     static void Main( string[] args )
     {
+      TestPostWorker();
+
       Console.WriteLine( "Retrieving printer queue information using WMI" );
       Console.WriteLine( "==================================" );
       //Query printer queue

@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServerCommunication\ServerCommunication.csproj">
+      <Project>{f285512a-8e85-46a9-8588-ef32b54e1553}</Project>
+      <Name>ServerCommunication</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
