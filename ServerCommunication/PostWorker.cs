@@ -12,12 +12,18 @@ namespace ServerCommunication
     private Thread _postWork;
     private PostWorkerSettings _settings;
     private const int WorkingInterval = 5000;
+    private bool _abort = false;
 
     public PostWorker( PostWorkerSettings settings)
     {
       _settings = settings;
       _postWork = new Thread(DoWork);
       _postWork.Start();
+    }
+
+    public void AbortWorker()
+    {
+      _abort = true;
     }
 
     private void DeleteFile( string fullPath )
@@ -74,7 +80,7 @@ namespace ServerCommunication
       if( !Directory.Exists( _settings.WorkingDirectory ) )
         Directory.CreateDirectory( _settings.WorkingDirectory );
 
-      while(true)
+      while( !_abort )
       {
         try
         {

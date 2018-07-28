@@ -47,6 +47,7 @@ namespace CaptureViewer
 
     public void CleanUp()
     {
+      _postWorker.AbortWorker();
       DebugLogger.Instance.LogEvent -= HandleLogMessage;
     }
 
