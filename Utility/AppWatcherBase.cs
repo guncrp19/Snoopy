@@ -11,9 +11,9 @@ namespace Utility
   public abstract class AppWatcherBase
   {
     private Thread watcher;
-    private const int PollingInterval = 1000;
+    private const int TicTocInterval = 1000;
     private const int ReAskingInterval = 1000;
-    private const int RetryNum = 5;
+    private const int RetryNum = 3;
     protected const string spFp = @"D:\wdFile";
     protected string WatcherPath;
     private bool _abortThread = false;
@@ -95,7 +95,7 @@ namespace Utility
             }
             Process.Start( _appName );
           }
-          Thread.Sleep( PollingInterval );
+          Thread.Sleep( TicTocInterval );
         }
         catch(Exception)
         {

