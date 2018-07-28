@@ -43,6 +43,8 @@
     <Compile Include="PostReq.cs" />
     <Compile Include="PostReqPayload.cs" />
     <Compile Include="PostReqSettings.cs" />
+    <Compile Include="PostWorker.cs" />
+    <Compile Include="PostWorkerSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
