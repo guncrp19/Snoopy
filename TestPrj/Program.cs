@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Management;
+using log4net;
 using ServerCommunication;
 
 namespace TestPrj
 {
   class Program
   {
+    public static readonly ILog Log =
+              LogManager.GetLogger( System.Reflection.MethodBase.GetCurrentMethod().DeclaringType );
+
     static PostWorker _worker;
     static void TestPostWorker()
     {
@@ -23,6 +27,8 @@ namespace TestPrj
 
     static void Main( string[] args )
     {
+      Log.Error("eRROR 1 test!");
+
       TestPostWorker();
 
       Console.WriteLine( "Retrieving printer queue information using WMI" );
