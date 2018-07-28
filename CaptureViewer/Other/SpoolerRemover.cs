@@ -11,30 +11,37 @@ namespace CaptureViewer.Other
 
     public static void RemoveExceededSpoolFile(string spoolerPath)
     {
-      var directory = new DirectoryInfo( spoolerPath );
-      var list = directory.GetFiles( "*.SPL" ).Concat(directory.GetFiles("*.SHD"));
-      if( list.Count() <= MaxNumber )
-        return;
-
-      var query = list.OrderByDescending( file => file.CreationTime );
-      var i = 0;
-      foreach( var file in query )
+      try
       {
-        if( i++ < MaxNumber )
+        var directory = new DirectoryInfo( spoolerPath );
+        var list = directory.GetFiles( "*.SPL" ).Concat( directory.GetFiles( "*.SHD" ) );
+        if( list.Count() <= MaxNumber )
+          return;
+
+        var query = list.OrderByDescending( file => file.CreationTime );
+        var i = 0;
+        foreach( var file in query )
         {
-          continue;
-        }
-        else
-        {
-          try
+          if( i++ < MaxNumber )
           {
-            File.Delete( file.FullName );
+            continue;
           }
-          catch(Exception ex)
+          else
           {
-            DebugLogger.Instance.Log( string.Format( "Remove failed. reason={0}", ex.Message ) );
+            try
+            {
+              File.Delete( file.FullName );
+            }
+            catch( Exception ex )
+            {
+              DebugLogger.Instance.Log( string.Format( "Remove failed. reason={0}", ex.Message ) );
+            }
           }
         }
+      }
+      catch
+      {
+
       }
     }
   }
