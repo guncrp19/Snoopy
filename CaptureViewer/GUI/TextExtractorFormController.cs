@@ -14,7 +14,7 @@ namespace CaptureViewer
     private ResultCollector _collector;
     private readonly TextExtractorForm _extractorForm;
     private DebugForm _debugForm;
-    private PostReq _serverComm;
+    private PostReq _postRequest;
     private ApplicationConfig _appConfig;
 
     public TextExtractorFormController( TextExtractorForm form )
@@ -58,7 +58,7 @@ namespace CaptureViewer
         SecurityProtocol =_appConfig.SecurityProtocol
       };
 
-      _serverComm = new PostReq(settings);
+      _postRequest = new PostReq(settings);
     }
 
     private void HandleLogMessage( string message )
@@ -93,7 +93,7 @@ namespace CaptureViewer
           Content  = data,
         };
 
-        _serverComm.SendPostCommand( payload );
+        _postRequest.SendPostCommand( payload );
       }
       catch(Exception ex)
       {
