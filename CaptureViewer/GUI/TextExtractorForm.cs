@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using Utility;
 
@@ -25,24 +26,6 @@ namespace CaptureViewer
       this.WindowState = FormWindowState.Minimized;
     }
 
-    public void PrintToLog( string message, string fullPath )
-    {
-      if( InvokeRequired )
-      {
-        BeginInvoke( (Action)( () => PrintToLog( message, fullPath ) ) );
-        return;
-      }
-      TextBoxLogger.AppendText( message );
-      TextBoxLogger.AppendText( "=======================" );
-      TextBoxLogger.AppendText( Environment.NewLine );
-      TextBoxLogger.AppendText( "Saved to : " );
-      TextBoxLogger.AppendText( Environment.NewLine );
-      TextBoxLogger.AppendText( fullPath );
-      TextBoxLogger.AppendText( Environment.NewLine );
-      TextBoxLogger.AppendText( "=======================" );
-      TextBoxLogger.AppendText( Environment.NewLine );
-    }
-
     public void PrintToLog( string message )
     {
       if( InvokeRequired )
@@ -50,8 +33,13 @@ namespace CaptureViewer
         BeginInvoke( (Action)( () => PrintToLog( message ) ) );
         return;
       }
-      TextBoxLogger.AppendText( message );
-      TextBoxLogger.AppendText( Environment.NewLine );
+      var now = DateTime.Now;
+      StringBuilder sbuilder = new StringBuilder();
+      string timeStamp = string.Format( "[{0}-{1}-{2} {3}:{4}:{5}.{6}]", now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, now.Millisecond);
+      sbuilder.Append( timeStamp );
+      sbuilder.Append(Environment.NewLine);
+      sbuilder.Append(message);  
+      TextBoxLogger.Text = sbuilder.ToString();
     }
 
     public void ClearLog()
