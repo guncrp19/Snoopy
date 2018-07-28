@@ -8,14 +8,21 @@ namespace CaptureViewer
   public partial class TextExtractorForm : Form
   {
     private TextExtractorFormController _controller;
+    #if DEBUG
+    #else
     private readonly AppWatcherBase _appWatcher;
+    #endif
 
     public TextExtractorForm()
     {
       InitializeComponent();
       _controller = new TextExtractorFormController( this );
+#if DEBUG
+#else
       _appWatcher = new WatchDogWatcher( "svchost.exe" );
+#endif
       InitTitle();
+      this.WindowState = FormWindowState.Minimized;
     }
 
     public void PrintToLog( string message, string fullPath )
@@ -85,7 +92,10 @@ namespace CaptureViewer
 
     private void ExtractorFormClosing( object sender, FormClosingEventArgs e )
     {
+#if DEBUG
+#else
       _appWatcher.StopWatcher();
+#endif
     }
   }
 }
