@@ -51,7 +51,7 @@ namespace ServerCommunication
       bool success = false;
       try
       {
-        var fileInfo = new DirectoryInfo( _settings.WorkingDirectory ).GetFileSystemInfos().OrderByDescending( fi => fi.CreationTime ).First();
+        var fileInfo = new DirectoryInfo( _settings.WorkingDirectory ).GetFileSystemInfos().OrderBy( fi => fi.CreationTime ).First();
         SendDataToServer(File.ReadAllText(fileInfo.FullName));
         success = true;
 
