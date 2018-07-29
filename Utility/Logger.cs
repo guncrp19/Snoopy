@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using log4net;
+using log4net.Appender;
+using log4net.Repository.Hierarchy;
 
 namespace Utility
 {
@@ -18,6 +20,15 @@ namespace Utility
       { 
         Log.Error(message);
       }
+    }
+
+    public static string GetLogFileName()
+    {
+      var rootAppender = ( (Hierarchy)Log.Logger.Repository )
+                                         .Root.Appenders.OfType<FileAppender>()
+                                         .FirstOrDefault();
+
+      return rootAppender != null ? rootAppender.File : string.Empty;
     }
 
     public static void LogException( Exception ex )

@@ -71,7 +71,8 @@ namespace CaptureViewer
 
     private void debugToolStripMenuItem_Click( object sender, EventArgs e )
     {
-      _controller.ShowDebugDialog();
+      _controller.ShowLogDirectory();
+      //_controller.ShowDebugDialog();
     }
 
     private void ExtractorFormClosed( object sender, FormClosedEventArgs e )

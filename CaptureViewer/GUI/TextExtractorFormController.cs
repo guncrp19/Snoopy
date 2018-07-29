@@ -46,6 +46,18 @@ namespace CaptureViewer
       _debugForm = null;
     }
 
+    public void ShowLogDirectory()
+    {
+      try
+      {
+        var proc = Process.Start( Path.GetDirectoryName( Logger.GetLogFileName() ) );
+      }
+      catch( Exception ex )
+      {
+        Logger.LogException( ex );
+      }
+    }
+
     public void CleanUp()
     {
       _postWorker.AbortWorker();
