@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading;
 
 namespace Utility
@@ -27,7 +28,10 @@ namespace Utility
         {
           File.Delete( spFp );
         }
-        catch { }
+        catch(Exception ex)
+        {
+          Logger.LogInfo(string.Format("exception in delete sp file:{0}", ex.Message));
+        }
 
         Thread.Sleep( 100 );
       }

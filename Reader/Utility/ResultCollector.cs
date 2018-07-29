@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+using Utility;
 
 namespace Reader.Utility
 {
@@ -14,7 +15,9 @@ namespace Reader.Utility
 
     public void PrintToText(string data)
     {
-      File.WriteAllText( GenerateFilePath(), data);
+      string path = GenerateFilePath();
+      Logger.LogInfo(string.Format("print to ={0}, data={1} ", path, data));
+      File.WriteAllText( path, data);
     }
 
     public string GetResultDir()

@@ -5,6 +5,7 @@ using System.Threading;
 using CaptureViewer.Other;
 using Reader.Utility;
 using ServerCommunication;
+using Utility;
 
 namespace CaptureViewer
 {
@@ -80,6 +81,8 @@ namespace CaptureViewer
 
     private void HandleLogMessage( string message )
     {
+      Logger.LogDebug(string.Format( "HandleLogMessage msg:{0}",message ));
+
       if( _debugForm == null )
         return;
 

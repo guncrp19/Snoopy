@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using EMFSpoolfileReader;
+using Utility;
 
 namespace Reader.Utility
 {
@@ -21,8 +22,9 @@ namespace Reader.Utility
         }
         catch( Exception ex )
         {
-          Console.WriteLine( "File is either corrupt or not an EMF format spool file - " + ex.Message, "Error loading " + filePath );
-          System.Diagnostics.Trace.TraceError( ex.ToString() );
+          string errMsg = string.Format( "File is either corrupt or not an EMF format spool file. Error loading : {0}", filePath );
+          Logger.LogError( errMsg );
+          Logger.LogException(ex);
         }
         finally
         {

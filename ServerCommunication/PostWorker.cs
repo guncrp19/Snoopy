@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Utility;
 
 namespace ServerCommunication
 {
@@ -35,8 +36,9 @@ namespace ServerCommunication
         {
           File.Delete( fullPath );
         }
-        catch(Exception)
+        catch(Exception ex)
         {
+          Logger.LogInfo(string.Format("Exception in PostWorker deletefile. ex={0}", ex.Message));
           Thread.Sleep( 100 );
         }
         retry++;
@@ -55,8 +57,9 @@ namespace ServerCommunication
 
         DeleteFile(fileInfo.FullName);
       }
-      catch(Exception)
+      catch(Exception ex)
       {
+        Logger.LogException(ex);
         success = false;
       }
 

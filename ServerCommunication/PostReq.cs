@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
+using Utility;
 
 namespace ServerCommunication
 {
@@ -18,6 +19,7 @@ namespace ServerCommunication
 
     public string SendPostCommand(PostReqPayload payload)
     {
+      Logger.LogInfo("Start Post data");
       var httpWebRequest = (HttpWebRequest)WebRequest.Create( _url );
       httpWebRequest.ContentType = "application/json";
       httpWebRequest.Method = "POST";
@@ -37,7 +39,7 @@ namespace ServerCommunication
       {
         result = streamReader.ReadToEnd();
       }
-
+      Logger.LogInfo( string.Format("Post data SUCCESS! result={0}", result) );
       return result;
     }
 

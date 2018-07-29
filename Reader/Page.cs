@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using Utility;
 
 namespace EMFSpoolfileReader
 {
@@ -88,8 +89,8 @@ namespace EMFSpoolfileReader
       var prevPos = FileReader.BaseStream.Position;
       FileReader.BaseStream.Seek( record.Seek, SeekOrigin.Begin );
       var recordData = FileReader.ReadChars( record.Size + 8 );
-      Console.WriteLine("Record Type = {0}", record.Type);
-      Console.WriteLine( "[RECORD DATA] {0}", new string( recordData ) );
+      Logger.LogDebug(string.Format("Record Type = {0}", record.Type));
+      Logger.LogDebug( string.Format("[RECORD DATA] {0}", new string( recordData )) );
       PrintRecordByte( record, FileReader );
       FileReader.BaseStream.Seek( prevPos, SeekOrigin.Begin );
     }
@@ -99,12 +100,12 @@ namespace EMFSpoolfileReader
       var prevPos = FileReader.BaseStream.Position;
       FileReader.BaseStream.Seek( record.Seek, SeekOrigin.Begin );
       var recordData = FileReader.ReadBytes( record.Size + 8 );
-      Console.WriteLine( "Record data:" );
+      Logger.LogDebug( "Record data:" );
       for( int i = 0; i < recordData.Length; i++ )
       {
-        Console.Write("{0} ", recordData[i].ToString("x"));
+        Logger.LogDebug( string.Format("{0} ", recordData[i].ToString("x")));
       }
-      Console.WriteLine( "" );
+      Logger.LogDebug( "" );
       FileReader.BaseStream.Seek( prevPos, SeekOrigin.Begin );
     }
 

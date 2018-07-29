@@ -40,6 +40,7 @@ namespace CaptureViewer
       sbuilder.Append(Environment.NewLine);
       sbuilder.Append(message);  
       TextBoxLogger.Text = sbuilder.ToString();
+      Logger.LogInfo(string.Format("PrintToLog data: {0}", sbuilder.ToString()));
     }
 
     public void ClearLog()

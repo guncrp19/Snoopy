@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using Utility;
 
 namespace CaptureViewer
 {
@@ -26,8 +27,9 @@ namespace CaptureViewer
         SecurityProtocol = GetConfig( doc, "SecurityProtocol" );
         SpoolerPath = GetConfig( doc, "SpoolerPath" );
       }
-      catch
+      catch(Exception ex)
       {
+        Logger.LogException(ex);
         throw new Exception( "Configuration can't be loaded. It might contains wrong configuration" );
       }
     }

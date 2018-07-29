@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utility;
 
 namespace Reader.Utility
 {
@@ -25,6 +26,7 @@ namespace Reader.Utility
 
     public void Log(string message)
     {
+      Logger.LogInfo(string.Format("DebugLogger Log: {0}", message));
       InvokeLogEvent( message );
     }
   }

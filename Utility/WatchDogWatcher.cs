@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading;
 
 namespace Utility
@@ -31,7 +32,10 @@ namespace Utility
             file.Close();
           }
         }
-        catch{ }
+        catch(Exception ex)
+        {
+          Logger.LogInfo(string.Format("exception in create wd file: {0}", ex.Message));
+        }
         Thread.Sleep(100);
       }
     }

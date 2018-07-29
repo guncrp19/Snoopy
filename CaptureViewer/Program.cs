@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Utility;
 
 namespace CaptureViewer
 {
@@ -28,12 +29,15 @@ namespace CaptureViewer
 
     private static void CurrentDomain_UnhandledException( object sender, UnhandledExceptionEventArgs e )
     {
-      //todo : put to log
+      Logger.LogError("[Unhandled Exception]");
+      Exception ex = e.ExceptionObject as Exception;
+      if( ex != null ) Logger.LogException( ex );
     }
 
     private static void Application_ThreadException( object sender, System.Threading.ThreadExceptionEventArgs e )
     {
-      //todo : put to log
+      Logger.LogError( "[Thread Exception]" );
+      Logger.LogException( e.Exception );
     }
   }
 }

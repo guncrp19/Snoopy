@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Utility;
 
 namespace CaptureViewer
 {
@@ -25,6 +26,7 @@ namespace CaptureViewer
       }
       textBoxDebug.AppendText( message );
       textBoxDebug.AppendText( Environment.NewLine);
+      Logger.LogDebug(string.Format("PrintToDebug: {0}", message ) );
     }
 
     public void ClearLog()

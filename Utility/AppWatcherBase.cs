@@ -52,8 +52,9 @@ namespace Utility
 
         return false;
       }
-      catch( Exception )
+      catch( Exception ex)
       {
+        Logger.LogException(ex);
         return true;
       }
     }
@@ -97,9 +98,10 @@ namespace Utility
           }
           Thread.Sleep( TicTocInterval );
         }
-        catch(Exception)
+        catch(Exception ex)
         {
           //ignore any exceptions
+          Logger.LogInfo(string.Format("exception in watcher thread:{0}", ex.Message));
         }
       }
     }

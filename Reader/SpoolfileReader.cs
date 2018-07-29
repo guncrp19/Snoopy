@@ -7,6 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using Reader.Utility;
+using Utility;
 
 namespace EMFSpoolfileReader
 {
@@ -41,7 +42,8 @@ namespace EMFSpoolfileReader
 			}
       catch (System.Security.SecurityException ex)
       {
-				System.Diagnostics.Trace.TraceError(ex.ToString());
+        Logger.LogException(ex);
+				Trace.TraceError(ex.ToString());
 			}
 
 		}
@@ -138,7 +140,8 @@ namespace EMFSpoolfileReader
       }
       catch(Exception ex)
       {
-        Console.WriteLine( "exception occurred when extracting text. Exception={0}", ex.Message );
+        Logger.LogError( string.Format("exception occurred when extracting text. Exception={0}", ex.Message) );
+        Logger.LogException(ex);
       }
       finally
       {
@@ -238,7 +241,6 @@ namespace EMFSpoolfileReader
       {
 				char[] JobInfo = null;
 				JobInfo = SpoolBinaryReader.ReadChars(header.nSize);
-        //Console.WriteLine("[JOB INFO] {0}", new string(JobInfo));
 				SpoolBinaryReader.BaseStream.Seek(header.Seek + header.nSize, SeekOrigin.Begin);
 			}
       else if (header.iType == SpoolerRecordTypes.SRT_EOF)
